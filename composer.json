@@ -18,6 +18,7 @@
     "symfony/config": "*",
     "symfony/dependency-injection": "*",
     "symfony/http-kernel": "*",
+    "symfony/framework-bundle": "*",
     "snc/redis-bundle": "^2.0"
   },
   "require-dev": {

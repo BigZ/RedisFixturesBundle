@@ -2,7 +2,7 @@
 
 namespace Lab5Com\RedisFixturesBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
@@ -12,7 +12,7 @@ use Lab5Com\RedisFixturesBundle\RedisFixtureInterface;
  * Class RedisFixturesLoadCommand
  * @author Romain Richard
  */
-class RedisFixturesLoadCommand extends Command
+class RedisFixturesLoadCommand extends ContainerAwareCommand
 {
     /**
      * @var object $redisClient A Redis client supporting "set"
@@ -31,17 +31,21 @@ class RedisFixturesLoadCommand extends Command
 
     /**
      * RedisFixturesLoadCommand constructor.
-     * @param object $redisClient
-     * @param bool   $debug
+     * @param null $name
      */
-    public function __construct($redisClient, $debug)
+    public function __construct($name = null)
     {
-        $this->redisClient = $redisClient;
-        $this->debug = $debug;
+        $this->redisClient = $this->getContainer()->get(
+            $this->getContainer()->getParameter('lab5com.redis_fixtures.client')
+        );
+        $this->debug = $this->getContainer()->getParameter('lab5com.redis_fixtures.debug');
 
-        parent::__construct();
+        parent::__construct($name);
     }
 
+    /**
+     * Configure the command name & description
+     */
     protected function configure()
     {
         $this

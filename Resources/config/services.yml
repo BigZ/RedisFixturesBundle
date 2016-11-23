@@ -1,5 +1,0 @@
-lab5com.redis_fixtures.load:
-    class: Lab5com\RedisFixturesBundle\Command\RedisFixturesLoadCommand
-    arguments: ["@snc_redis.default", false]
-    tags:
-        - { name: console.command }

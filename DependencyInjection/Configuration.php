@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->booleanNode('debug')->defaultValue($this->debug)->end()
-            ->scalarNode('redis_client')->defaultValue('snc_redis.default')->end()
+            ->scalarNode('client')->defaultValue('snc_redis.default')->end()
             ->end()
         ;
 

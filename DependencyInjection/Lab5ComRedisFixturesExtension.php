@@ -21,10 +21,7 @@ class Lab5ComRedisFixturesExtension extends Extension
         $configuration = new Configuration($container->getParameter('kernel.debug'));
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
-
-        $container->getDefinition('lab5com.redis_fixtures.load')->replaceArgument(1, '@'.$config['redis_client']);
-        $container->getDefinition('lab5com.redis_fixtures.load')->replaceArgument(2, $config['debug']);
+        $container->setParameter('lab5com.redis_fixtures.client', $config['client']);
+        $container->setParameter('lab5com.redis_fixtures.debug', $config['client']);
     }
 }
